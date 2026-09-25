@@ -30,14 +30,10 @@ export default function Layout() {
       </a>
       <header className="sticky top-0 z-40 border-b border-navy-line/70 bg-navy/90 text-white backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4">
-          <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <img src="/pyne-emblem-gold.png" alt="" className="h-10 w-auto" />
-            <span className="min-w-0 leading-tight">
-              <span className="block truncate font-serif text-lg font-semibold">
-                Pyne Awards <span className="text-gold">Africa</span>
-              </span>
-              <span className="block text-[10px] font-bold tracking-[0.2em] text-gold/90 uppercase">{t('brand.album')}</span>
-            </span>
+          <Link to="/" className="flex min-w-0 items-center gap-3" aria-label={`Media Craft Mozambique · ${t('brand.album')}`}>
+            <img src="/mediacraft-logo.png" alt="Media Craft Mozambique" width={979} height={285} className="h-8 w-auto sm:h-9" />
+            <span className="h-7 w-px bg-white/25" aria-hidden />
+            <span className="text-[10px] leading-tight font-bold tracking-[0.2em] text-gold/90 uppercase sm:text-[11px]">{t('brand.album')}</span>
           </Link>
           <div className="flex items-center gap-3">
             {MAIN_SITE_URL && (
