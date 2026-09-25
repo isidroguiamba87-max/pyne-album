@@ -8,6 +8,7 @@ import { useI18n } from '../i18n'
 import { classify, readTakenAt } from '../lib/classify'
 import { days, eventById, events } from '../lib/programa'
 import { BUCKET, publicUrl, supabase, type AlbumPhoto } from '../lib/supabase'
+import AdminVideos from './AdminVideos'
 
 // ---------- login ----------
 
@@ -439,6 +440,7 @@ export default function Admin() {
         ) : (
           <>
             <Uploader onUploaded={bump} />
+            <AdminVideos />
             <Manager reloadKey={reloadKey} />
           </>
         )}

@@ -2,9 +2,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { IconImage, IconStar } from '../components/Icons'
 import Lightbox from '../components/Lightbox'
+import VideoCard from '../components/VideoCard'
 import { formatCount, useI18n } from '../i18n'
-import { days, events } from '../lib/programa'
+import { days, eventById, events } from '../lib/programa'
 import { publicUrl, supabase, type AlbumPhoto } from '../lib/supabase'
+import { useVideos } from '../lib/videos'
 
 const PAGE = 60
 type Sort = 'recent' | 'chrono'
@@ -57,6 +59,7 @@ export default function Album() {
   const [hasMore, setHasMore] = useState(true)
   const [open, setOpen] = useState<{ list: 'main' | 'featured' | 'single'; index: number } | null>(null)
   const [single, setSingle] = useState<AlbumPhoto | null>(null)
+  const { videos } = useVideos()
   const sentinel = useRef<HTMLDivElement>(null)
   const reqId = useRef(0)
   const busy = useRef(false)
@@ -196,6 +199,7 @@ export default function Album() {
 
   const lbList = open?.list === 'featured' ? featured : open?.list === 'single' && single ? [single] : photos
   const showFeatured = featured.length > 0 && !day && !session
+  const shownVideos = videos.filter((v) => (session ? v.event_id === session : day ? eventById(v.event_id)?.day === day : true))
 
   return (
     <>
@@ -290,6 +294,19 @@ export default function Album() {
               </section>
             )}
 
+            {/* vídeos */}
+            {shownVideos.length > 0 && (
+              <section className="mt-6">
+                <h2 className="mb-3 font-serif text-2xl font-bold text-ink">{t('video.title')}</h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {shownVideos.map((v) => (
+                    <VideoCard key={v.source + v.id} v={v} />
+                  ))}
+                </div>
+                {photos.length > 0 && <h2 className="mt-10 font-serif text-2xl font-bold text-ink">{t('album.photos')}</h2>}
+              </section>
+            )}
+
             {(day || session) && selectionTotal > 0 && (
               <p className="mt-5 text-sm text-ink-soft">
                 {selectionTotal === 1 ? t('album.count.one') : t('album.count.many', { n: formatCount(selectionTotal, lang) })}
@@ -303,7 +320,7 @@ export default function Album() {
               ))}
             </div>
 
-            {!loading && !error && photos.length === 0 && (
+            {!loading && !error && photos.length === 0 && shownVideos.length === 0 && (
               <div className="mx-auto mt-8 max-w-md rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-paper-line">
                 <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-navy text-gold">
                   <IconImage className="h-7 w-7" />
