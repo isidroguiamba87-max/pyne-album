@@ -1,0 +1,691 @@
+{
+  "event": {
+    "name": "The Pyne Awards Africa 2026",
+    "edition": "6.ª edição / 6th edition",
+    "city": "Maputo, Moçambique",
+    "dates": {
+      "start": "2026-09-24",
+      "end": "2026-09-26"
+    },
+    "timezone": "Africa/Maputo",
+    "brand": {
+      "navy": "#13263D",
+      "gold": "#FDC91C",
+      "red": "#C12128",
+      "white": "#FFFFFF"
+    },
+    "partners": [
+      "The Pyne Hospitality Company",
+      "República de Moçambique",
+      "Conselho Municipal de Maputo",
+      "I Love Maputo",
+      "Media Craft Mozambique"
+    ]
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2026-09-24",
+      "label": {
+        "pt": "Dia 1 · 24 Set",
+        "en": "Day 1 · 24 Sep"
+      },
+      "theme": {
+        "pt": "Liderança e boas-vindas",
+        "en": "Leadership & welcome"
+      }
+    },
+    {
+      "day": 2,
+      "date": "2026-09-25",
+      "label": {
+        "pt": "Dia 2 · 25 Set",
+        "en": "Day 2 · 25 Sep"
+      },
+      "theme": {
+        "pt": "Negócios e Gala",
+        "en": "Business & Gala"
+      }
+    },
+    {
+      "day": 3,
+      "date": "2026-09-26",
+      "label": {
+        "pt": "Dia 3 · 26 Set",
+        "en": "Day 3 · 26 Sep"
+      },
+      "theme": {
+        "pt": "Visita de familiarização",
+        "en": "Familiarisation visit"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "elevate-breakfast",
+      "day": 1,
+      "date": "2026-09-24",
+      "title": {
+        "pt": "ELEVATE – Pyne Women's Leadership Breakfast",
+        "en": "ELEVATE – Pyne Women's Leadership Breakfast"
+      },
+      "subtitle": {
+        "pt": "Sessão da manhã",
+        "en": "Morning session"
+      },
+      "venue": "Polana Serena Hotel",
+      "time": "08:00–12:10",
+      "dressCode": {
+        "pt": "Business Casual",
+        "en": "Business Casual"
+      },
+      "audience": {
+        "pt": "Mulheres líderes",
+        "en": "Women leaders"
+      },
+      "items": [
+        {
+          "start": "08:00",
+          "end": "08:40",
+          "title": {
+            "pt": "Recepção e registo dos participantes",
+            "en": "Arrival and registration"
+          },
+          "lead": {
+            "pt": "Secretariado",
+            "en": "Secretariat"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "08:40",
+          "end": "08:45",
+          "title": {
+            "pt": "Entrada do Presidium",
+            "en": "Arrival of the presiding dignitaries"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "08:45",
+          "end": "08:50",
+          "title": {
+            "pt": "Apresentação do programa",
+            "en": "Introduction to the programme"
+          },
+          "lead": {
+            "pt": "Mestre de cerimónias",
+            "en": "Master of Ceremonies"
+          }
+        },
+        {
+          "start": "08:50",
+          "end": "09:00",
+          "title": {
+            "pt": "Intervenção do Conselho Municipal de Maputo",
+            "en": "Remarks on behalf of Maputo Municipal Council"
+          },
+          "lead": {
+            "pt": "S. Ex.ª Rasaque Manhique — Presidente do Conselho Municipal de Maputo",
+            "en": "H.E. Rasaque Manhique — Mayor of Maputo"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "09:00",
+          "end": "10:00",
+          "title": {
+            "pt": "Intervenções de Contexto",
+            "en": "Setting the Scene"
+          },
+          "lead": {
+            "pt": "",
+            "en": ""
+          },
+          "speakers": [
+            {
+              "name": "Esperança Mangaze",
+              "role": {
+                "pt": "Fundadora e Directora, Folha Verde",
+                "en": "Founder and Director, Folha Verde"
+              }
+            },
+            {
+              "name": "Esselina Macome",
+              "role": {
+                "pt": "Directora Executiva, Financial Sector Deepening Moçambique (FSDMoç)",
+                "en": "Chief Executive Officer, Financial Sector Deepening Mozambique (FSDMoç)"
+              }
+            }
+          ]
+        },
+        {
+          "start": "10:00",
+          "end": "11:00",
+          "title": {
+            "pt": "Perspectivas das Mulheres Líderes Africanas",
+            "en": "Perspectives from African Women Leaders"
+          },
+          "lead": {
+            "pt": "",
+            "en": ""
+          },
+          "kind": "panel",
+          "speakers": [
+            {
+              "name": "Amaka Amatokwu-Ndekwu",
+              "role": {
+                "pt": "CEO, The Pyne Hospitality Company",
+                "en": "CEO, The Pyne Hospitality Company"
+              }
+            },
+            {
+              "name": "Julie Babaly Scott",
+              "role": {
+                "pt": "Ex-Presidente, SKAL International · Directora-Geral, Bunson Travel Services Ltd",
+                "en": "Former President, SKAL International · Managing Director, Bunson Travel Services Ltd"
+              }
+            },
+            {
+              "name": "Linda Fernando",
+              "role": {
+                "pt": "Co-Fundadora e Administradora, Media Craft Mozambique",
+                "en": "Co-Founder and Executive Director, Media Craft Mozambique"
+              }
+            }
+          ]
+        },
+        {
+          "start": "11:00",
+          "end": "11:05",
+          "title": {
+            "pt": "Considerações finais",
+            "en": "Closing remarks"
+          },
+          "lead": {
+            "pt": "Helder Jauana — PCA da ANDITUR",
+            "en": "Helder Jauana — Chairman of the Board, ANDITUR"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "11:05",
+          "end": "11:10",
+          "title": {
+            "pt": "Discurso de encerramento",
+            "en": "Closing address"
+          },
+          "lead": {
+            "pt": "S. Ex.ª Rasaque Manhique — Presidente do Conselho Municipal de Maputo",
+            "en": "H.E. Rasaque Manhique — Mayor of Maputo"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "11:10",
+          "end": "11:20",
+          "title": {
+            "pt": "Fotografia oficial e encerramento da sessão",
+            "en": "Official photograph and close of session"
+          },
+          "lead": {
+            "pt": "Todos",
+            "en": "All participants"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "11:20",
+          "end": "12:10",
+          "title": {
+            "pt": "Pequeno-almoço e Networking Executivo",
+            "en": "Breakfast and Executive Networking"
+          },
+          "lead": {
+            "pt": "Todos",
+            "en": "All participants"
+          },
+          "kind": "networking"
+        }
+      ]
+    },
+    {
+      "id": "welcome-mixer",
+      "day": 1,
+      "date": "2026-09-24",
+      "title": {
+        "pt": "Pyne Welcome Mixer & Red Carpet Reception",
+        "en": "Pyne Welcome Mixer & Red Carpet Reception"
+      },
+      "subtitle": {
+        "pt": "Recepção de boas-vindas",
+        "en": "Welcome reception"
+      },
+      "venue": "Hotel Cardoso",
+      "time": "19:00–20:30",
+      "dressCode": {
+        "pt": "Afro-Chic / Safari Noir",
+        "en": "Afro-Chic / Safari Noir"
+      },
+      "audience": {
+        "pt": "Representantes do sector do turismo, instituições públicas e privadas, banca, operadores turísticos, embaixadores do turismo, parceiros de cooperação e delegações internacionais",
+        "en": "Tourism industry representatives, public and private institutions, banks, tour operators, tourism ambassadors, development partners and international delegations"
+      },
+      "items": [
+        {
+          "start": "19:00",
+          "end": "19:30",
+          "title": {
+            "pt": "Chegada dos convidados",
+            "en": "Guest arrivals"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "19:30",
+          "end": "19:35",
+          "title": {
+            "pt": "Recepção e Welcome Drinks",
+            "en": "Reception and welcome drinks"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "networking"
+        },
+        {
+          "start": "19:35",
+          "end": "19:40",
+          "title": {
+            "pt": "Mensagem de boas-vindas da organização",
+            "en": "Welcome remarks by the organisers"
+          },
+          "lead": {
+            "pt": "Amaka Amatokwu-Ndekwu — CEO, Pyne Awards Africa",
+            "en": "Amaka Amatokwu-Ndekwu — CEO, Pyne Awards Africa"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:40",
+          "end": "19:50",
+          "title": {
+            "pt": "Intervenção institucional",
+            "en": "Official remarks"
+          },
+          "lead": {
+            "pt": "S. Ex.ª Fredson Bacar — Secretário de Estado do Turismo",
+            "en": "H.E. Fredson Bacar — Secretary of State for Tourism"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:50",
+          "end": "20:00",
+          "title": {
+            "pt": "Maputo — oportunidades económicas e de parceria",
+            "en": "Maputo – business and partnership opportunities"
+          },
+          "lead": {
+            "pt": "Alexandre Muianga — Vereador de Actividades Económicas e Turismo, Conselho Municipal de Maputo",
+            "en": "Alexandre Muianga — Councillor for Economic Activities and Tourism, Maputo Municipal Council"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "20:00",
+          "end": "20:10",
+          "title": {
+            "pt": "Moçambique — potencial turístico",
+            "en": "Mozambique – tourism opportunities"
+          },
+          "lead": {
+            "pt": "ANDITUR",
+            "en": "ANDITUR"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "20:10",
+          "end": "20:30",
+          "title": {
+            "pt": "Música, performance cultural e networking",
+            "en": "Music, cultural performance and networking"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "culture"
+        }
+      ]
+    },
+    {
+      "id": "b2b-meetings",
+      "day": 2,
+      "date": "2026-09-25",
+      "title": {
+        "pt": "Encontros de Negócios",
+        "en": "Business Meetings"
+      },
+      "subtitle": {
+        "pt": "Negócios e diálogo",
+        "en": "Business and dialogue"
+      },
+      "venue": "Montebelo Indy Village, Maputo",
+      "time": "08:30–13:00",
+      "dressCode": null,
+      "audience": {
+        "pt": "Instituições públicas e privadas nacionais e internacionais",
+        "en": "National and international public and private institutions"
+      },
+      "items": [
+        {
+          "start": "08:30",
+          "end": "09:00",
+          "title": {
+            "pt": "Recepção dos participantes",
+            "en": "Participant arrivals"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "09:00",
+          "end": "11:30",
+          "title": {
+            "pt": "Encontros empresariais B2B Pyne Africa",
+            "en": "Pyne Africa B2B Business Meetings"
+          },
+          "lead": {
+            "pt": "The Pyne Hospitality Company",
+            "en": "The Pyne Hospitality Company"
+          },
+          "kind": "networking"
+        },
+        {
+          "start": "11:30",
+          "end": "13:00",
+          "title": {
+            "pt": "Diálogo sobre liderança no turismo africano",
+            "en": "Dialogue on Leadership in African Tourism"
+          },
+          "lead": {
+            "pt": "The Pyne Hospitality Company",
+            "en": "The Pyne Hospitality Company"
+          },
+          "kind": "panel"
+        },
+        {
+          "start": "13:00",
+          "end": null,
+          "title": {
+            "pt": "Encerramento das sessões diurnas e preparação para a Gala",
+            "en": "Close of daytime sessions and preparations for the Gala"
+          },
+          "lead": {
+            "pt": "Todos os participantes",
+            "en": "All participants"
+          },
+          "kind": "logistics"
+        }
+      ]
+    },
+    {
+      "id": "gala",
+      "day": 2,
+      "date": "2026-09-25",
+      "title": {
+        "pt": "6.ª Gala Pyne Awards Africa 2026",
+        "en": "6th Pyne Awards Africa Gala 2026"
+      },
+      "subtitle": {
+        "pt": "Gala de entrega de prémios",
+        "en": "Awards gala"
+      },
+      "venue": "Montebelo Indy Village, Maputo",
+      "time": "17:30–22:20",
+      "dressCode": {
+        "pt": "Black Tie / Elegância Africana",
+        "en": "Black Tie / African Elegance"
+      },
+      "audience": null,
+      "highlight": true,
+      "items": [
+        {
+          "start": "17:30",
+          "end": "18:40",
+          "title": {
+            "pt": "Chegada dos convidados",
+            "en": "Guest arrivals"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "18:40",
+          "end": "19:00",
+          "title": {
+            "pt": "Chegada de S. Ex.ª Basílio Muhate, Ministro da Economia",
+            "en": "Arrival of H.E. Basílio Muhate, Minister of Economy"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "19:00",
+          "end": "19:10",
+          "title": {
+            "pt": "Actuação musical moçambicana",
+            "en": "Mozambican musical performance"
+          },
+          "lead": {
+            "pt": "Onésia Muholove",
+            "en": "Onésia Muholove"
+          },
+          "kind": "culture"
+        },
+        {
+          "start": "19:10",
+          "end": "19:15",
+          "title": {
+            "pt": "Intervenção de S. Ex.ª Rasaque Manhique, Presidente do Conselho Municipal de Maputo",
+            "en": "Remarks by H.E. Rasaque Manhique, Mayor of Maputo"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:15",
+          "end": "19:20",
+          "title": {
+            "pt": "Intervenção da Sra. Amaka Amatokwu-Ndekwu",
+            "en": "Remarks by Ms Amaka Amatokwu-Ndekwu"
+          },
+          "lead": {
+            "pt": "The Pyne Hospitality Company",
+            "en": "The Pyne Hospitality Company"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:20",
+          "end": "19:25",
+          "title": {
+            "pt": "Intervenção da Sra. Linda Fernando, Co-Fundadora e Administradora da Media Craft Mozambique",
+            "en": "Remarks by Ms Linda Fernando, Co-Founder and Executive Director, Media Craft Mozambique"
+          },
+          "lead": {
+            "pt": "Media Craft Mozambique",
+            "en": "Media Craft Mozambique"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:25",
+          "end": "19:40",
+          "title": {
+            "pt": "Intervenção de S. Ex.ª Edmund Bartlett, Ministro do Turismo da Jamaica",
+            "en": "Remarks by H.E. Edmund Bartlett, Minister of Tourism of Jamaica"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "19:40",
+          "end": "20:35",
+          "title": {
+            "pt": "Apresentação das categorias e entrega dos galardões Pyne Awards Africa e MIPAD",
+            "en": "Presentation of award categories and Pyne Awards Africa and MIPAD awards"
+          },
+          "lead": {
+            "pt": "The Pyne Hospitality Company",
+            "en": "The Pyne Hospitality Company"
+          },
+          "kind": "awards"
+        },
+        {
+          "start": "20:35",
+          "end": "20:45",
+          "title": {
+            "pt": "Momento cultural",
+            "en": "Cultural performance"
+          },
+          "lead": {
+            "pt": "Onésia Muholove",
+            "en": "Onésia Muholove"
+          },
+          "kind": "culture"
+        },
+        {
+          "start": "20:45",
+          "end": "21:00",
+          "title": {
+            "pt": "Discurso de S. Ex.ª Basílio Muhate, Ministro da Economia",
+            "en": "Address by H.E. Basílio Muhate, Minister of Economy"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "speech"
+        },
+        {
+          "start": "21:00",
+          "end": "22:00",
+          "title": {
+            "pt": "Jantar de Gala",
+            "en": "Gala Dinner"
+          },
+          "lead": {
+            "pt": "Todos",
+            "en": "All participants"
+          },
+          "kind": "networking"
+        },
+        {
+          "start": "22:10",
+          "end": "22:20",
+          "title": {
+            "pt": "Encerramento da Gala",
+            "en": "Close of the Gala"
+          },
+          "lead": {
+            "pt": "Mestre de cerimónias",
+            "en": "Master of Ceremonies"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fam-trip",
+      "day": 3,
+      "date": "2026-09-26",
+      "title": {
+        "pt": "Visita de Familiarização",
+        "en": "Familiarisation Visit"
+      },
+      "subtitle": {
+        "pt": "Descobrir Maputo",
+        "en": "Discover Maputo"
+      },
+      "venue": "Baía de Maputo, Ilha de Inhaca e Santa Maria",
+      "time": "07:30–17:00",
+      "dressCode": null,
+      "audience": null,
+      "items": [
+        {
+          "start": "07:30",
+          "end": "08:00",
+          "title": {
+            "pt": "Concentração e recepção dos participantes em Maputo",
+            "en": "Participants assemble and check in at Maputo"
+          },
+          "lead": {
+            "pt": "Protocolo",
+            "en": "Protocol team"
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "08:00",
+          "end": "17:00",
+          "title": {
+            "pt": "Descobrir Maputo — visita de familiarização turística à Baía de Maputo",
+            "en": "Discover Maputo – tourism familiarisation visit to Maputo Bay"
+          },
+          "lead": {
+            "pt": "Todos",
+            "en": "All participants"
+          },
+          "kind": "excursion"
+        },
+        {
+          "start": "17:00",
+          "end": null,
+          "title": {
+            "pt": "Encerramento do programa",
+            "en": "Close of the programme"
+          },
+          "lead": {
+            "pt": "Todos",
+            "en": "All participants"
+          },
+          "kind": "logistics"
+        }
+      ]
+    }
+  ],
+  "_notes": [
+    "Fonte actual: Programa_Pyne_Awards_Africa_2026_PT_-_Geral.docx (24/09). Traduções EN dos itens novos feitas a partir do PT.",
+    "Corrigido: 'Entrada do Presidiu' -> 'Entrada do Presidium'; 'Payne' -> 'Pyne'.",
+    "Pequeno-almoço agora termina às 12:10; o cabeçalho do documento ainda diz 08h00–12h00. No site usa-se 08:00–12:10.",
+    "Por confirmar: intervalo 22:00–22:10 na Gala.",
+    "Por confirmar: Dia 2 (Encontros de Negócios) e Dia 3 sem traje indicado."
+  ],
+  "_version": "2026-09-24 09:40 — Programa PT Geral (revisto)"
+}

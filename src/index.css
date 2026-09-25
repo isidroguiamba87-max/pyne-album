@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #13263d;
+  --color-navy-deep: #0c1a2b;
+  --color-navy-soft: #1b3350;
+  --color-navy-line: #2a4666;
+  --color-gold: #fdc91c;
+  --color-gold-soft: #fde28a;
+  --color-red: #c12128;
+  /* superfícies claras */
+  --color-paper: #f6f3ec;
+  --color-paper-line: #e6dfcf;
+  --color-ink: #13263d;
+  --color-ink-soft: #52627a;
+  --color-gold-deep: #8a6500; /* dourado legível sobre branco (AA) */
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  background: var(--color-navy);
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-navy);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.92) translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-pop-in { animation: pop-in 0.45s ease-out both; }
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.animate-live { animation: live-pulse 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop-in, .animate-live { animation: none; }
+}
+
+@keyframes glow-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate3d(2%, -3%, 0) scale(1.08); opacity: 1; }
+}
+.animate-glow { animation: glow-drift 12s ease-in-out infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-glow, .animate-fade-up { animation: none; }
+}
+
+/* Fundo de gala: marinho profundo com brilho dourado e um toque de vermelho */
+.hero-bg {
+  background:
+    radial-gradient(55% 65% at 18% 38%, rgba(245, 158, 11, 0.2), transparent 70%),
+    radial-gradient(45% 60% at 100% 0%, rgba(251, 191, 36, 0.08), transparent 70%),
+    radial-gradient(50% 60% at 95% 100%, rgba(193, 33, 40, 0.28), transparent 70%),
+    linear-gradient(160deg, #0a1728 0%, #13263d 45%, #172e4a 70%, #0c1a2b 100%);
+}
+
+/* Padrão geométrico (losangos) inspirado no motivo do emblema */
+.pattern-diamonds {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23FDC91C' stroke-width='1'%3E%3Cpath d='M28 4 52 28 28 52 4 28Z'/%3E%3Cpath d='M28 16 40 28 28 40 16 28Z'/%3E%3C/g%3E%3Cg fill='%23FDC91C'%3E%3Ccircle cx='0' cy='0' r='1.6'/%3E%3Ccircle cx='56' cy='0' r='1.6'/%3E%3Ccircle cx='0' cy='56' r='1.6'/%3E%3Ccircle cx='56' cy='56' r='1.6'/%3E%3Ccircle cx='28' cy='28' r='1.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 56px;
+}
+
+/* Texto dourado com brilho metálico */
+.text-gold-grad {
+  background: linear-gradient(180deg, #ffe89a 0%, #fdc91c 45%, #d99f0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* text-shadow pinta por cima do texto recortado; usar drop-shadow */
+  text-shadow: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+}
+
+.bg-gold-grad {
+  background: linear-gradient(135deg, #ffe07a 0%, #fdc91c 40%, #e2a910 100%);
+}
+
+/* Linha dourada que esbate nas pontas */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(253, 201, 28, 0.8), transparent);
+}
