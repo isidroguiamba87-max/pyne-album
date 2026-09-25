@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Album from './pages/Album'
 
@@ -19,6 +19,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Album />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="videos" element={<Navigate to="/?ver=videos" replace />} />
           <Route path="*" element={<Album />} />
         </Route>
       </Routes>

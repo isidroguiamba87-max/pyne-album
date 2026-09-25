@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { IconImage, IconStar } from '../components/Icons'
+import { IconImage, IconStar, IconVideo } from '../components/Icons'
 import Lightbox from '../components/Lightbox'
 import VideoCard from '../components/VideoCard'
 import { formatCount, useI18n } from '../i18n'
@@ -50,6 +50,8 @@ export default function Album() {
   const day = Number(params.get('dia')) || null
   const session = params.get('sessao') || null
   const sort: Sort = params.get('ordem') === 'chrono' ? 'chrono' : 'recent'
+  // ecrã activo: fotos (padrão) ou vídeos
+  const view: 'fotos' | 'videos' = params.get('ver') === 'videos' ? 'videos' : 'fotos'
 
   const [photos, setPhotos] = useState<AlbumPhoto[]>([])
   const [featured, setFeatured] = useState<AlbumPhoto[]>([])
@@ -66,7 +68,8 @@ export default function Album() {
   const openRef = useRef(open)
   openRef.current = open
 
-  const setFilter = (k: string, v: string | null) => {
+  const setView = (v: 'fotos' | 'videos') => setFilter('ver', v === 'videos' ? 'videos' : null)
+  function setFilter(k: string, v: string | null) {
     const p = new URLSearchParams(params)
     if (v) p.set(k, v)
     else p.delete(k)
@@ -148,7 +151,8 @@ export default function Album() {
     const io = new IntersectionObserver((e) => e[0].isIntersecting && photos.length > 0 && loadMore(), { rootMargin: '1200px' })
     io.observe(el)
     return () => io.disconnect()
-  }, [hasMore, photos.length, loadMore])
+    // view: o sentinela só existe no ecrã de fotos
+  }, [hasMore, photos.length, loadMore, view])
 
   // link directo para uma foto (?foto=id)
   const fotoParam = params.get('foto')
@@ -229,6 +233,26 @@ export default function Album() {
             {/* filtros */}
             <div className="sticky top-16 z-30 -mx-4 border-b border-paper-line/70 bg-paper/90 px-4 py-3 backdrop-blur-md">
               <div className="flex flex-wrap items-center gap-2">
+                <div className="flex w-full rounded-2xl bg-white p-1 shadow-sm ring-1 ring-paper-line sm:w-auto" role="tablist" aria-label={t('album.title')}>
+                  {([
+                    ['fotos', t('album.photos'), IconImage, total],
+                    ['videos', t('video.title'), IconVideo, videos.length],
+                  ] as const).map(([k, label, Icon, n]) => (
+                    <button
+                      key={k}
+                      role="tab"
+                      aria-selected={view === k}
+                      onClick={() => setView(k)}
+                      className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition sm:flex-none ${
+                        view === k ? 'bg-navy text-gold shadow-md' : 'text-ink-soft hover:text-ink'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      {label}
+                      {n ? <span className={`rounded-full px-1.5 text-xs tabular-nums ${view === k ? 'bg-gold text-navy' : 'bg-paper text-ink-soft'}`}>{formatCount(n, lang)}</span> : null}
+                    </button>
+                  ))}
+                </div>
                 <div className="-mx-1 flex gap-2 overflow-x-auto px-1" role="group">
                   {[{ v: null as number | null, label: t('album.all'), n: total }, ...days.map((d) => ({ v: d.day, label: L(d.label).split('·')[0].trim(), n: byDay(d.day) }))].map(
                     (f) => (
@@ -241,7 +265,7 @@ export default function Album() {
                         }`}
                       >
                         {f.label}
-                        {f.n > 0 && <span className={`ml-1.5 text-xs tabular-nums ${day === f.v ? 'text-gold/70' : 'text-ink-soft'}`}>{formatCount(f.n, lang)}</span>}
+                        {view === 'fotos' && f.n > 0 && <span className={`ml-1.5 text-xs tabular-nums ${day === f.v ? 'text-gold/70' : 'text-ink-soft'}`}>{formatCount(f.n, lang)}</span>}
                       </button>
                     ),
                   )}
@@ -256,10 +280,11 @@ export default function Album() {
                     <option value="">{t('album.allSessions')}</option>
                     {sessions.map((ev) => (
                       <option key={ev.id} value={ev.id}>
-                        {L(ev.title)} ({formatCount(byEvent(ev.id), lang)})
+                        {L(ev.title)}{view === 'fotos' ? ` (${formatCount(byEvent(ev.id), lang)})` : ''}
                       </option>
                     ))}
                   </select>
+                  {view === 'fotos' && (
                   <select
                     aria-label="Ordem"
                     value={sort}
@@ -269,12 +294,13 @@ export default function Album() {
                     <option value="recent">{lang === 'pt' ? 'Mais recentes' : 'Newest'}</option>
                     <option value="chrono">{lang === 'pt' ? 'Cronológica' : 'Chronological'}</option>
                   </select>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* destaques */}
-            {showFeatured && (
+            {view === 'fotos' && showFeatured && (
               <section className="mt-6">
                 <h2 className="mb-3 flex items-center gap-2 font-serif text-2xl font-bold text-ink">
                   <IconStar className="h-5 w-5 fill-gold text-gold-deep" /> {t('album.featured')}
@@ -294,19 +320,29 @@ export default function Album() {
               </section>
             )}
 
-            {/* vídeos */}
-            {shownVideos.length > 0 && (
-              <section className="mt-6">
-                <h2 className="mb-3 font-serif text-2xl font-bold text-ink">{t('video.title')}</h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {shownVideos.map((v) => (
-                    <VideoCard key={v.source + v.id} v={v} />
-                  ))}
-                </div>
-                {photos.length > 0 && <h2 className="mt-10 font-serif text-2xl font-bold text-ink">{t('album.photos')}</h2>}
+            {/* ecrã de vídeos */}
+            {view === 'videos' && (
+              <section className="mt-6" aria-label={t('video.title')}>
+                {shownVideos.length > 0 ? (
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {shownVideos.map((v) => (
+                      <VideoCard key={v.source + v.id} v={v} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mx-auto mt-2 max-w-md rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-paper-line">
+                    <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-navy text-gold">
+                      <IconVideo className="h-7 w-7" />
+                    </span>
+                    <p className="mt-4 text-ink-soft">{t('video.empty')}</p>
+                  </div>
+                )}
               </section>
             )}
 
+            {/* ecrã de fotos */}
+            {view === 'fotos' && (
+            <>
             {(day || session) && selectionTotal > 0 && (
               <p className="mt-5 text-sm text-ink-soft">
                 {selectionTotal === 1 ? t('album.count.one') : t('album.count.many', { n: formatCount(selectionTotal, lang) })}
@@ -320,7 +356,7 @@ export default function Album() {
               ))}
             </div>
 
-            {!loading && !error && photos.length === 0 && shownVideos.length === 0 && (
+            {!loading && !error && photos.length === 0 && (
               <div className="mx-auto mt-8 max-w-md rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-paper-line">
                 <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-navy text-gold">
                   <IconImage className="h-7 w-7" />
@@ -350,6 +386,8 @@ export default function Album() {
               </div>
             )}
             {!hasMore && photos.length > PAGE && <p className="py-6 text-center text-sm text-ink-soft">{t('album.end')}</p>}
+            </>
+            )}
           </>
         )}
       </div>
