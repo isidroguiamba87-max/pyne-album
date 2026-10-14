@@ -25,6 +25,7 @@ export interface AlbumPhoto {
   bytes: number | null
   featured: boolean
   hidden: boolean
+  event_slug: string
 }
 
 export function publicUrl(path: string) {

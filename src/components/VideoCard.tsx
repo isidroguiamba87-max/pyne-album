@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useI18n } from '../i18n'
-import { eventById } from '../lib/programa'
+import { useEvent } from '../events/EventContext'
 import { thumbUrl, type Video } from '../lib/videos'
 
 /** Capa do YouTube com botão play; o leitor só carrega depois do clique (página leve) */
 export default function VideoCard({ v }: { v: Video }) {
   const { t, L } = useI18n()
+  const { eventById } = useEvent().program
   const [playing, setPlaying] = useState(false)
   const ev = eventById(v.event_id)
 

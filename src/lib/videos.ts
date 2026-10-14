@@ -51,29 +51,29 @@ const valid = (id: string) => (/^[A-Za-z0-9_-]{11}$/.test(id) ? id : null)
 export const thumbUrl = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
 export const watchUrl = (id: string) => `https://www.youtube.com/watch?v=${id}`
 
-async function fetchFrom(client: SupabaseClient | null, source: VideoSource, includeHidden: boolean): Promise<Video[]> {
+async function fetchFrom(client: SupabaseClient | null, source: VideoSource, includeHidden: boolean, eventSlug: string): Promise<Video[]> {
   if (!client) return []
-  let q = client.from('videos').select('*').order('created_at', { ascending: false }).limit(200)
+  let q = client.from('videos').select('*').eq('event_slug', eventSlug).order('created_at', { ascending: false }).limit(200)
   if (!includeHidden) q = q.eq('hidden', false)
   const { data, error } = await q
   if (error) return [] // tabela ainda não criada num dos lados: ignora
   return (data ?? []).map((v) => ({ ...(v as Omit<Video, 'source'>), source }))
 }
 
-/** Vídeos dos dois projectos, mais recentes primeiro, sem repetidos */
-export function useVideos(includeHidden = false) {
+/** Vídeos de UM evento, dos dois projectos, mais recentes primeiro, sem repetidos */
+export function useVideos(eventSlug: string, includeHidden = false) {
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
 
   const refresh = useCallback(async () => {
-    const [own, theirs] = await Promise.all([fetchFrom(supabase, OWN_SOURCE, includeHidden), fetchFrom(other, 'site', includeHidden)])
+    const [own, theirs] = await Promise.all([fetchFrom(supabase, OWN_SOURCE, includeHidden, eventSlug), fetchFrom(other, 'site', includeHidden, eventSlug)])
     const seen = new Set<string>()
     const merged = [...own, ...theirs]
       .sort((a, b) => b.created_at.localeCompare(a.created_at))
       .filter((v) => (seen.has(v.youtube_id) ? false : (seen.add(v.youtube_id), true)))
     setVideos(merged)
     setLoading(false)
-  }, [includeHidden])
+  }, [includeHidden, eventSlug])
 
   useEffect(() => {
     refresh()

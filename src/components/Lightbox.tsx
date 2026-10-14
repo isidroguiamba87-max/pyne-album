@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useI18n } from '../i18n'
-import { days, eventById } from '../lib/programa'
+import { useEvent } from '../events/EventContext'
 import { publicUrl, type AlbumPhoto } from '../lib/supabase'
 import { IconChevronL, IconChevronR, IconDownload, IconShare, IconX } from './Icons'
 import { useToast } from './Toast'
@@ -16,6 +16,8 @@ interface Props {
 
 export default function Lightbox({ photos, index, total, onIndex, onClose, onNearEnd }: Props) {
   const { t, L } = useI18n()
+  const meta = useEvent()
+  const { days, eventById } = meta.program
   const toast = useToast()
   const photo = photos[index]
   const touchX = useRef<number | null>(null)
@@ -49,13 +51,13 @@ export default function Lightbox({ photos, index, total, onIndex, onClose, onNea
   if (!photo) return null
   const src = publicUrl(photo.path)
   const ev = eventById(photo.event_id)
-  const day = days.find((d) => d.day === photo.day)
+  const day = days.length > 1 ? days.find((d) => d.day === photo.day) : undefined
 
   async function share() {
-    const url = `${window.location.origin}/?foto=${photo.id}`
+    const url = `${window.location.origin}/${meta.slug}?foto=${photo.id}`
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Pyne Awards Africa 2026', url })
+        await navigator.share({ title: meta.shortName, url })
         return
       }
       await navigator.clipboard.writeText(url)

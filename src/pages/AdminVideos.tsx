@@ -2,14 +2,16 @@ import { useState, type FormEvent } from 'react'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { useToast } from '../components/Toast'
 import { useI18n } from '../i18n'
-import { eventById, events } from '../lib/programa'
+import { useEvent } from '../events/EventContext'
 import { supabase } from '../lib/supabase'
 import { OWN_SOURCE, parseYouTubeId, thumbUrl, useVideos, watchUrl, type Video } from '../lib/videos'
 
 export default function AdminVideos() {
   const { t, L } = useI18n()
   const toast = useToast()
-  const { videos, refresh } = useVideos(true)
+  const meta = useEvent()
+  const { eventById, events } = meta.program
+  const { videos, refresh } = useVideos(meta.slug, true)
   const [link, setLink] = useState('')
   const [title, setTitle] = useState('')
   const [eventId, setEventId] = useState('')
@@ -24,7 +26,7 @@ export default function AdminVideos() {
     if (!ytId) return toast(t('video.admin.badLink'), 'error')
     if (!title.trim()) return toast(t('video.admin.needTitle'), 'error')
     setBusy(true)
-    const { error } = await supabase.from('videos').insert({ youtube_id: ytId, title: title.trim().slice(0, 140), event_id: eventId || null })
+    const { error } = await supabase.from('videos').insert({ youtube_id: ytId, title: title.trim().slice(0, 140), event_id: eventId || null, event_slug: meta.slug })
     setBusy(false)
     if (error) return toast(error.code === '23505' ? t('video.admin.dup') : error.message, 'error')
     setLink('')

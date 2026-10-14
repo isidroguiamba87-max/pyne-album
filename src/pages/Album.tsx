@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router-dom'
 import { IconImage, IconStar, IconVideo } from '../components/Icons'
 import Lightbox from '../components/Lightbox'
 import VideoCard from '../components/VideoCard'
+import { formatDateRange } from '../events'
+import { useEvent } from '../events/EventContext'
 import { formatCount, useI18n } from '../i18n'
-import { days, eventById, events } from '../lib/programa'
 import { publicUrl, supabase, type AlbumPhoto } from '../lib/supabase'
 import { useVideos } from '../lib/videos'
 
@@ -46,6 +47,9 @@ function Tile({ p, onOpen, priority }: { p: AlbumPhoto; onOpen: () => void; prio
 
 export default function Album() {
   const { t, L, lang } = useI18n()
+  const ev = useEvent()
+  const slug = ev.slug
+  const { days, eventById, events } = ev.program
   const [params, setParams] = useSearchParams()
   const day = Number(params.get('dia')) || null
   const session = params.get('sessao') || null
@@ -61,7 +65,7 @@ export default function Album() {
   const [hasMore, setHasMore] = useState(true)
   const [open, setOpen] = useState<{ list: 'main' | 'featured' | 'single'; index: number } | null>(null)
   const [single, setSingle] = useState<AlbumPhoto | null>(null)
-  const { videos } = useVideos()
+  const { videos } = useVideos(slug)
   const sentinel = useRef<HTMLDivElement>(null)
   const reqId = useRef(0)
   const busy = useRef(false)
@@ -84,8 +88,9 @@ export default function Album() {
     supabase
       .from('album_counts')
       .select('*')
+      .eq('event_slug', slug)
       .then(({ data }) => setCounts((data ?? []) as Count[]))
-  }, [])
+  }, [slug])
 
   // destaques
   useEffect(() => {
@@ -93,12 +98,13 @@ export default function Album() {
     supabase
       .from('album_photos')
       .select('*')
+      .eq('event_slug', slug)
       .eq('featured', true)
       .eq('hidden', false)
       .order('taken_at', { ascending: true, nullsFirst: false })
       .limit(24)
       .then(({ data }) => setFeatured((data ?? []) as AlbumPhoto[]))
-  }, [])
+  }, [slug])
 
   const load = useCallback(
     async (from: number) => {
@@ -110,6 +116,7 @@ export default function Album() {
       let q = supabase
         .from('album_photos')
         .select('*')
+        .eq('event_slug', slug)
         .eq('hidden', false)
         .order('taken_at', { ascending: sort === 'chrono', nullsFirst: false })
         .order('id', { ascending: true })
@@ -129,7 +136,7 @@ export default function Album() {
       })
       setHasMore(rows.length === PAGE)
     },
-    [day, session, sort],
+    [day, session, sort, slug],
   )
 
   // recarregar ao mudar filtros
@@ -167,6 +174,7 @@ export default function Album() {
     supabase
       .from('album_photos')
       .select('*')
+      .eq('event_slug', slug)
       .eq('id', fotoParam)
       .maybeSingle()
       .then(({ data }) => {
@@ -199,7 +207,7 @@ export default function Album() {
   const byDay = (d: number) => counts.filter((c) => c.day === d).reduce((a, c) => a + c.n, 0)
   const byEvent = (id: string) => counts.filter((c) => c.event_id === id).reduce((a, c) => a + c.n, 0)
   const selectionTotal = session ? byEvent(session) : day ? byDay(day) : total
-  const sessions = useMemo(() => events.filter((e) => !day || e.day === day), [day])
+  const sessions = useMemo(() => events.filter((e) => !day || e.day === day), [day, events])
 
   const lbList = open?.list === 'featured' ? featured : open?.list === 'single' && single ? [single] : photos
   const showFeatured = featured.length > 0 && !day && !session
@@ -209,17 +217,30 @@ export default function Album() {
     <>
       {/* topo */}
       <section className="hero-bg relative isolate overflow-hidden text-white">
-        <img src="/hero-elevate.webp" alt="" aria-hidden className="absolute inset-0 -z-20 h-full w-full object-cover object-[60%_45%]" />
-        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(10,23,40,0.92)_0%,rgba(19,38,61,0.78)_55%,rgba(19,38,61,0.45)_100%)]" aria-hidden />
-        <div className="mx-auto max-w-7xl px-4 pt-10 pb-10 md:pt-14 md:pb-14">
-          <p className="text-[11px] font-bold tracking-[0.25em] text-gold uppercase md:text-xs">{t('album.kicker')}</p>
+        {ev.heroImage && (
+          <>
+            <img src={ev.heroImage} alt="" aria-hidden className="absolute inset-0 -z-20 h-full w-full object-cover object-[60%_45%]" />
+            <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(10,23,40,0.92)_0%,rgba(19,38,61,0.78)_55%,rgba(19,38,61,0.45)_100%)]" aria-hidden />
+          </>
+        )}
+        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-4 pt-10 pb-10 md:pt-14 md:pb-14">
+          <div>
+          <p className="text-[11px] font-bold tracking-[0.25em] text-gold uppercase md:text-xs">{L(ev.name)}</p>
           <h1 className="mt-2 font-serif text-4xl font-bold md:text-6xl">{t('album.title')}</h1>
-          <p className="mt-2 max-w-xl text-white/85 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">{t('album.sub')}</p>
+          <p className="mt-2 max-w-xl text-white/85 [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+            {t('album.sub.event', { dates: formatDateRange(ev, lang), city: L(ev.city).split(',')[0] })}
+          </p>
           {total > 0 && (
             <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold ring-1 ring-white/20 backdrop-blur">
               <IconImage className="h-4 w-4 text-gold" />
               {total === 1 ? t('album.count.one') : t('album.count.many', { n: formatCount(total, lang) })}
             </p>
+          )}
+          </div>
+          {ev.look === 'light' && (
+            <span className="w-full max-w-md rounded-2xl bg-white p-3 shadow-xl sm:w-auto">
+              <img src={ev.logo.src} alt={ev.logo.alt} width={ev.logo.width} height={ev.logo.height} className="h-auto w-full sm:h-20 sm:w-auto" />
+            </span>
           )}
         </div>
         <div className="gold-rule absolute inset-x-0 bottom-0" aria-hidden />
@@ -253,7 +274,7 @@ export default function Album() {
                     </button>
                   ))}
                 </div>
-                <div className="-mx-1 flex gap-2 overflow-x-auto px-1" role="group">
+                <div className={`-mx-1 flex gap-2 overflow-x-auto px-1 ${days.length < 2 ? 'hidden' : ''}`} role="group">
                   {[{ v: null as number | null, label: t('album.all'), n: total }, ...days.map((d) => ({ v: d.day, label: L(d.label).split('·')[0].trim(), n: byDay(d.day) }))].map(
                     (f) => (
                       <button

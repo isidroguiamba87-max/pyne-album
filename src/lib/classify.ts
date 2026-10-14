@@ -1,27 +1,12 @@
-import data from '../../data/programa.json'
+import type { Program } from '../events/program'
 
-// Mesma regra do scripts/upload.mjs: a hora da foto (Maputo, UTC+2) decide o dia e a sessão.
-interface Ev {
-  id: string
-  day: number
-  date: string
-  items: { start: string; end: string | null }[]
-}
-const programa = data as unknown as { days: { day: number; date: string }[]; events: Ev[] }
-const at = (date: string, hhmm: string) => Date.parse(`${date}T${hhmm}:00+02:00`)
-
-const windows = programa.events.map((e) => {
-  const last = e.items[e.items.length - 1]
-  return { id: e.id, day: e.day, from: at(e.date, e.items[0].start) - 60 * 60_000, to: at(e.date, last.end ?? last.start) + 90 * 60_000 }
-})
-
-export function classify(taken: Date | null): { day: number | null; event_id: string | null } {
+// Mesma regra do scripts/upload.mjs: a hora da foto (Maputo, UTC+2) decide o dia e o bloco do programa.
+export function classify(program: Program, taken: Date | null): { day: number | null; event_id: string | null } {
   if (!taken) return { day: null, event_id: null }
-  const t = taken.getTime()
-  const w = windows.find((x) => x.from <= t && t <= x.to)
-  if (w) return { day: w.day, event_id: w.id }
-  const date = new Date(t + 2 * 3600_000).toISOString().slice(0, 10)
-  return { day: programa.days.find((d) => d.date === date)?.day ?? null, event_id: null }
+  const m = program.momentAt(taken.getTime())
+  if (m) return { day: m.event.day, event_id: m.event.id }
+  const date = new Date(taken.getTime() + 2 * 3600_000).toISOString().slice(0, 10)
+  return { day: program.days.find((d) => d.date === date)?.day ?? null, event_id: null }
 }
 
 /** Lê a hora da foto do EXIF (a câmara grava hora local; assumimos Maputo se não houver fuso) */

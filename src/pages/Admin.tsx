@@ -6,7 +6,12 @@ import { IconCheck, IconEyeOff, IconStar, IconUpload } from '../components/Icons
 import { useToast } from '../components/Toast'
 import { useI18n } from '../i18n'
 import { classify, readTakenAt } from '../lib/classify'
-import { days, eventById, events } from '../lib/programa'
+import { Link, useParams } from 'react-router-dom'
+import EventCard from '../components/EventCard'
+import { IconChevronL } from '../components/Icons'
+import { eventBySlug, eventPhase, eventsTodayFirst, formatDateRange } from '../events'
+import { EventNotFound, EventProvider, useEvent, useEventTheme } from '../events/EventContext'
+import type { Program } from '../events/program'
 import { BUCKET, publicUrl, supabase, type AlbumPhoto } from '../lib/supabase'
 import AdminVideos from './AdminVideos'
 
@@ -61,6 +66,8 @@ interface Job {
   error?: string
   day: number | null // null = automático
   eventId: string | null
+  eventSlug: string
+  program: Program
 }
 
 async function sha10(file: File) {
@@ -90,7 +97,7 @@ async function processJob(job: Job, update: (p: Partial<Job>) => void) {
   if (exists) return update({ status: 'dup', progress: 100 })
 
   const taken = await readTakenAt(job.file)
-  const auto = classify(taken)
+  const auto = classify(job.program, taken)
   const day = job.day ?? auto.day
   const eventId = job.eventId ?? (auto.day === day ? auto.event_id : null)
 
@@ -116,7 +123,8 @@ async function processJob(job: Job, update: (p: Partial<Job>) => void) {
   const color = await dominantColor(thumb)
 
   const slug = job.file.name.replace(/\.[^.]+$/, '').replace(/[^a-z0-9_-]+/gi, '-').toLowerCase()
-  const dir = day ?? 0
+  // {evento}/{dia}/... (as fotos antigas do Pyne ficam onde estão)
+  const dir = `${job.eventSlug}/${day ?? 0}`
   const path = `${dir}/${slug}-${hash}.webp`
   const thumbPath = `${dir}/thumbs/${slug}-${hash}.webp`
   const opts = { contentType: 'image/webp', cacheControl: '31536000', upsert: true }
@@ -129,6 +137,7 @@ async function processJob(job: Job, update: (p: Partial<Job>) => void) {
   if (up2.error) throw up2.error
 
   const { error } = await sb.from('album_photos').insert({
+    event_slug: job.eventSlug,
     file_name: fileName,
     taken_at: taken?.toISOString() ?? null,
     day,
@@ -146,6 +155,8 @@ async function processJob(job: Job, update: (p: Partial<Job>) => void) {
 
 function Uploader({ onUploaded }: { onUploaded: () => void }) {
   const { t, L } = useI18n()
+  const ev = useEvent()
+  const { days, events } = ev.program
   const [day, setDay] = useState<number | null>(null)
   const [eventId, setEventId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Job[]>([])
@@ -175,7 +186,7 @@ function Uploader({ onUploaded }: { onUploaded: () => void }) {
     const list = Array.from(files).filter((f) => f.type.startsWith('image/'))
     setJobs((js) => [
       ...js,
-      ...list.map((file) => ({ id: crypto.randomUUID(), file, preview: URL.createObjectURL(file), status: 'queued' as Status, progress: 0, day, eventId })),
+      ...list.map((file) => ({ id: crypto.randomUUID(), file, preview: URL.createObjectURL(file), status: 'queued' as Status, progress: 0, day, eventId, eventSlug: ev.slug, program: ev.program })),
     ])
   }
 
@@ -309,6 +320,8 @@ const LIST_PAGE = 48
 
 function Manager({ reloadKey }: { reloadKey: number }) {
   const { t, L } = useI18n()
+  const ev = useEvent()
+  const { eventById } = ev.program
   const toast = useToast()
   const [photos, setPhotos] = useState<AlbumPhoto[]>([])
   const [onlyHidden, setOnlyHidden] = useState(false)
@@ -318,14 +331,14 @@ function Manager({ reloadKey }: { reloadKey: number }) {
   const load = useCallback(
     async (from: number) => {
       if (!supabase) return
-      let q = supabase.from('album_photos').select('*').order('created_at', { ascending: false }).range(from, from + LIST_PAGE - 1)
+      let q = supabase.from('album_photos').select('*').eq('event_slug', ev.slug).order('created_at', { ascending: false }).range(from, from + LIST_PAGE - 1)
       if (onlyHidden) q = q.eq('hidden', true)
       const { data } = await q
       const rows = (data ?? []) as AlbumPhoto[]
       setPhotos((xs) => (from === 0 ? rows : [...xs, ...rows]))
       setHasMore(rows.length === LIST_PAGE)
     },
-    [onlyHidden],
+    [onlyHidden, ev.slug],
   )
 
   useEffect(() => {
@@ -396,12 +409,37 @@ function Manager({ reloadKey }: { reloadKey: number }) {
   )
 }
 
+/** Faixa fixa: em que evento se está a publicar */
+function AdminEventBar() {
+  const { t, L, lang } = useI18n()
+  const ev = useEvent()
+  return (
+    <div className="sticky top-16 z-30 border-b-2 border-gold bg-navy text-white shadow-lg">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-2.5">
+        <p className="min-w-0 text-sm">
+          <span className="text-white/70">{t('admin.publishingIn')}</span>{' '}
+          <strong className="font-bold text-gold">
+            {L(ev.name)} – {formatDateRange(ev, lang)}
+          </strong>
+        </p>
+        <Link to="/admin" className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-white/10 px-3 py-1.5 text-sm font-semibold ring-1 ring-white/20 hover:bg-white/20">
+          <IconChevronL className="h-4 w-4" />
+          {t('admin.switchEvent')}
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 export default function Admin() {
   const { t } = useI18n()
+  const { eventSlug } = useParams()
+  const event = eventSlug ? eventBySlug(eventSlug) : undefined
   const [session, setSession] = useState<Session | null>(null)
   const [ready, setReady] = useState(false)
   const [reloadKey, setReloadKey] = useState(0)
   const bump = useCallback(() => setReloadKey((k) => k + 1), [])
+  useEventTheme(event?.slug ?? null)
 
   useEffect(() => {
     if (!supabase) return
@@ -413,12 +451,14 @@ export default function Admin() {
     return () => data.subscription.unsubscribe()
   }, [])
 
+  if (eventSlug && !event) return <EventNotFound />
+
   return (
     <>
       <section className="hero-bg relative text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-4 pt-9 pb-8">
           <div>
-            <p className="text-[11px] font-bold tracking-[0.25em] text-gold uppercase">{t('album.kicker')}</p>
+            <p className="text-[11px] font-bold tracking-[0.25em] text-gold uppercase">fotos.mediacraft.co.mz</p>
             <h1 className="mt-2 font-serif text-4xl font-bold">{t('admin.title')}</h1>
           </div>
           {session && (
@@ -432,19 +472,34 @@ export default function Admin() {
         </div>
         <div className="gold-rule absolute inset-x-0 bottom-0" aria-hidden />
       </section>
-      <div className="mx-auto max-w-7xl px-4 pt-6">
-        {!supabase ? (
+      {!supabase ? (
+        <div className="mx-auto max-w-7xl px-4 pt-6">
           <p className="rounded-2xl bg-white p-5 text-ink-soft shadow-sm ring-1 ring-paper-line">{t('offline')}</p>
-        ) : !ready ? null : !session ? (
+        </div>
+      ) : !ready ? null : !session ? (
+        <div className="mx-auto max-w-7xl px-4 pt-6">
           <Login />
-        ) : (
-          <>
+        </div>
+      ) : event ? (
+        <EventProvider event={event}>
+          <AdminEventBar />
+          <div className="mx-auto max-w-7xl px-4 pt-6">
             <Uploader onUploaded={bump} />
             <AdminVideos />
             <Manager reloadKey={reloadKey} />
-          </>
-        )}
-      </div>
+          </div>
+        </EventProvider>
+      ) : (
+        <div className="mx-auto max-w-7xl px-4 pt-8">
+          <h2 className="font-serif text-3xl font-bold text-ink">{t('events.title')}</h2>
+          <p className="mt-1 text-ink-soft">{t('admin.choose.sub')}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {eventsTodayFirst().map((e) => (
+              <EventCard key={e.slug} event={e} to={`/admin/${e.slug}`} recommended={eventPhase(e) === 'today'} />
+            ))}
+          </div>
+        </div>
+      )}
     </>
   )
 }

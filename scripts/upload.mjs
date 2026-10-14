@@ -1,9 +1,13 @@
 // Envio em lote das fotos do evento para o álbum (Supabase).
 //
 // Uso:
-//   npm run upload -- "D:\Fotos\Pyne"                 (atribui dia/sessão pela hora da foto)
-//   npm run upload -- "D:\Fotos\Gala" --dia 2 --evento gala
-//   npm run upload -- "D:\Fotos\Pyne" --dry-run        (só mostra o que faria, não envia)
+//   npm run upload -- "D:\Fotos\CitizenConnect"                       (evento, dia e bloco pela data/hora da foto)
+//   npm run upload -- "D:\Fotos\CC" --slug citizen-connect-2026       (força o evento)
+//   npm run upload -- "D:\Fotos\Gala" --slug pyne-awards-2026 --dia 2 --evento gala
+//   npm run upload -- "D:\Fotos\Pyne" --dry-run                       (só mostra o que faria, não envia)
+//
+// Eventos: data/events/<slug>.json. Sem --slug, a data da foto (Maputo) escolhe o evento;
+// fotos sem data ou fora das datas de qualquer evento dão erro (use --slug).
 //
 // Pode ser interrompido e voltado a correr: fotos já enviadas são ignoradas.
 // Precisa de .env.script (ver .env.script.example).
@@ -15,7 +19,13 @@ import { createClient } from '@supabase/supabase-js'
 import exifr from 'exifr'
 import sharp from 'sharp'
 
-const programa = JSON.parse(await readFile(new URL('../data/programa.json', import.meta.url), 'utf8'))
+// todos os programas: data/events/<slug>.json
+const eventsDir = new URL('../data/events/', import.meta.url)
+const PROGRAMS = {}
+for (const name of await readdir(eventsDir)) {
+  if (!name.endsWith('.json')) continue
+  PROGRAMS[name.replace(/\.json$/, '')] = JSON.parse(await readFile(new URL(name, eventsDir), 'utf8'))
+}
 
 // ---------- argumentos ----------
 const args = process.argv.slice(2)
@@ -23,47 +33,67 @@ const flag = (name) => {
   const i = args.indexOf(name)
   return i >= 0 ? args[i + 1] : undefined
 }
-const folder = args.find((a, i) => !a.startsWith('--') && !['--dia', '--evento', '--concorrencia'].includes(args[i - 1]))
+const folder = args.find((a, i) => !a.startsWith('--') && !['--dia', '--evento', '--slug', '--concorrencia'].includes(args[i - 1]))
 const DRY = args.includes('--dry-run')
 const FORCE_DAY = flag('--dia') ? Number(flag('--dia')) : null
 const FORCE_EVENT = flag('--evento') ?? null
+const FORCE_SLUG = flag('--slug') ?? null
 const CONCURRENCY = Number(flag('--concorrencia') ?? 4)
 
 if (!folder) {
   console.error('Indique a pasta das fotos. Ex.: npm run upload -- "D:\\Fotos\\Pyne"')
   process.exit(1)
 }
-if (FORCE_EVENT && !programa.events.some((e) => e.id === FORCE_EVENT)) {
-  console.error(`--evento inválido. Use um de: ${programa.events.map((e) => e.id).join(', ')}`)
+if (FORCE_SLUG && !PROGRAMS[FORCE_SLUG]) {
+  console.error(`--slug inválido. Use um de: ${Object.keys(PROGRAMS).join(', ')}`)
+  process.exit(1)
+}
+if (FORCE_EVENT && !FORCE_SLUG) {
+  console.error('--evento (bloco) precisa de --slug (o evento). Ex.: --slug pyne-awards-2026 --evento gala')
+  process.exit(1)
+}
+if (FORCE_EVENT && !PROGRAMS[FORCE_SLUG].events.some((e) => e.id === FORCE_EVENT)) {
+  console.error(`--evento inválido. Use um de: ${PROGRAMS[FORCE_SLUG].events.map((e) => e.id).join(', ')}`)
   process.exit(1)
 }
 
-// ---------- programa → janelas de tempo (hora de Maputo, UTC+2) ----------
+// ---------- programas → janelas de tempo (hora de Maputo, UTC+2) ----------
 const at = (date, hhmm) => Date.parse(`${date}T${hhmm}:00+02:00`)
-const windows = programa.events.map((e) => {
-  const first = e.items[0]
-  const last = e.items[e.items.length - 1]
-  return {
-    id: e.id,
-    day: e.day,
-    // margem: 60 min antes (chegadas) e 90 min depois (fotos de grupo, networking)
-    from: at(e.date, first.start) - 60 * 60_000,
-    to: at(e.date, last.end ?? last.start) + 90 * 60_000,
-  }
-})
-const dayByDate = Object.fromEntries(programa.days.map((d) => [d.date, d.day]))
+const maputoDate = (t) => new Date(t + 2 * 3600_000).toISOString().slice(0, 10)
+const WINDOWS = Object.fromEntries(
+  Object.entries(PROGRAMS).map(([slug, programa]) => [
+    slug,
+    programa.events.map((e) => {
+      const last = e.items[e.items.length - 1]
+      // margem: 60 min antes (chegadas) e 90 min depois (fotos de grupo, networking)
+      return { id: e.id, day: e.day, from: at(e.date, e.items[0].start) - 60 * 60_000, to: at(e.date, last.end ?? last.start) + 90 * 60_000 }
+    }),
+  ]),
+)
 
-function classify(takenAt) {
+/** Evento da foto: --slug, senão o evento cujas datas incluem a data (Maputo) da foto */
+function eventFor(takenAt) {
+  if (FORCE_SLUG) return FORCE_SLUG
+  if (!takenAt) return null
+  const d = maputoDate(takenAt.getTime())
+  return Object.keys(PROGRAMS).find((slug) => {
+    const { start, end } = PROGRAMS[slug].event.dates
+    return start <= d && d <= end
+  }) ?? null
+}
+
+function classify(slug, takenAt) {
+  const programa = PROGRAMS[slug]
   if (FORCE_DAY || FORCE_EVENT) {
     const ev = programa.events.find((e) => e.id === FORCE_EVENT)
     return { day: FORCE_DAY ?? ev?.day ?? null, event_id: FORCE_EVENT }
   }
-  if (!takenAt) return { day: null, event_id: null }
+  if (!takenAt) return { day: programa.days.length === 1 ? programa.days[0].day : null, event_id: null }
   const t = takenAt.getTime()
-  const w = windows.find((x) => x.from <= t && t <= x.to)
+  const w = WINDOWS[slug].find((x) => x.from <= t && t <= x.to)
   if (w) return { day: w.day, event_id: w.id }
-  const date = new Date(t + 2 * 3600_000).toISOString().slice(0, 10) // data em Maputo
-  return { day: dayByDate[date] ?? null, event_id: null }
+  const single = programa.days.length === 1 ? programa.days[0].day : null // evento de um só dia
+  return { day: programa.days.find((x) => x.date === maputoDate(t))?.day ?? single, event_id: null }
 }
 
 // A câmara grava a hora local sem fuso: interpretamos como hora de Maputo
@@ -179,8 +209,11 @@ async function handle(file) {
       stats.skipped++
       return
     }
-    const { day, event_id } = classify(taken)
-    const dir = day ?? 0
+    const slug = eventFor(taken)
+    if (!slug) throw new Error(taken ? 'data da foto fora dos eventos — use --slug' : 'foto sem data (EXIF) — use --slug')
+    const { day, event_id } = classify(slug, taken)
+    // {evento}/{dia}/... (as fotos antigas do Pyne ficam onde estão)
+    const dir = `${slug}/${day ?? 0}`
     const pathLarge = `${dir}/${p.slug}-${p.hash}.webp`
     const pathThumb = `${dir}/thumbs/${p.slug}-${p.hash}.webp`
 
@@ -196,6 +229,7 @@ async function handle(file) {
       })
       await retry(async () => {
         const r = await sb.from('album_photos').insert({
+          event_slug: slug,
           file_name: p.fileName,
           taken_at: taken?.toISOString() ?? null,
           day,
@@ -212,7 +246,7 @@ async function handle(file) {
     }
     stats.ok++
     stats.bytes += p.large.length + p.thumb.length
-    const tag = `${day ? `Dia ${day}` : 'sem dia'}${event_id ? ` · ${event_id}` : ''}`
+    const tag = `${slug} · ${day ? `Dia ${day}` : 'sem dia'}${event_id ? ` · ${event_id}` : ''}`
     const kb = Math.round((p.large.length + p.thumb.length) / 1024)
     console.log(`[${++done + stats.skipped}/${files.length}] ${DRY ? 'teste' : 'ok'}  ${rel}  →  ${tag}  (${kb} KB)`)
   } catch (e) {

@@ -1,0 +1,816 @@
+{
+  "event": {
+    "slug": "citizen-connect-2026",
+    "name": "Citizen Connect Africa – Moçambique",
+    "shortName": "Citizen Connect Africa",
+    "tagline": "Ideate · Innovate · Interact",
+    "city": "Maputo, Moçambique",
+    "venue": null,
+    "dates": {
+      "start": "2026-10-14",
+      "end": "2026-10-14"
+    },
+    "timezone": "Africa/Maputo",
+    "organisers": [
+      "VFS Global",
+      "CiX"
+    ],
+    "hostCountry": "República de Moçambique",
+    "brand": {
+      "navy": "#183A62",
+      "coral": "#EF655B",
+      "white": "#FFFFFF",
+      "accentGradient": [
+        "#7CC576",
+        "#F7A541",
+        "#E8505B",
+        "#8E4FA0",
+        "#2FA7DF"
+      ],
+      "logo": "/events/citizen-connect-2026/header.png"
+    }
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2026-10-14",
+      "label": {
+        "pt": "14 Out",
+        "en": "14 Oct"
+      },
+      "theme": {
+        "pt": "Conferência",
+        "en": "Conference"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "cc-abertura",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "10:00–13:00",
+      "title": {
+        "pt": "Cerimónia de Abertura",
+        "en": "Opening Ceremony"
+      },
+      "subtitle": {
+        "pt": "Com a presença de S. Ex.ª o Presidente da República",
+        "en": "With H.E. the President of the Republic"
+      },
+      "items": [
+        {
+          "start": "10:00",
+          "end": "11:00",
+          "title": {
+            "pt": "Chegada, Credenciação e Café de Boas-Vindas",
+            "en": "Arrival, Accreditation & Welcome Coffee"
+          },
+          "description": {
+            "pt": "Chegada e credenciação dos participantes, com chá, café e um lanche ligeiro de boas-vindas.",
+            "en": "Arrival and accreditation of participants, with welcome tea, coffee and light refreshments."
+          },
+          "kind": "logistics"
+        },
+        {
+          "start": "11:00",
+          "end": "11:15",
+          "title": {
+            "pt": "Chegada de S. Ex.ª Daniel Francisco Chapo, Presidente da República",
+            "en": "Arrival of H.E. Daniel Francisco Chapo, President of the Republic"
+          },
+          "description": {
+            "pt": "Recepção oficial pelo Comité de Recepção, seguida de um breve encontro com o representante sénior da VFS Global.",
+            "en": "Official welcome by the Reception Committee, followed by a brief meeting with the senior VFS Global representative."
+          },
+          "kind": "protocol"
+        },
+        {
+          "start": "11:15",
+          "end": "11:30",
+          "title": {
+            "pt": "Visita aos Espaços de Exposição",
+            "en": "Visit to the Exhibition Booths"
+          },
+          "description": {
+            "pt": "Visita de S. Ex.ª o Presidente da República aos espaços de exposição e demonstração.",
+            "en": "Visit by H.E. the President of the Republic to the exhibition and demonstration areas."
+          },
+          "kind": "protocol"
+        },
+        {
+          "start": "11:30",
+          "end": "11:35",
+          "title": {
+            "pt": "Entrada de S. Ex.ª o Presidente da República e Hino Nacional",
+            "en": "Presidential Entrance & National Anthem"
+          },
+          "description": {
+            "pt": "Entrada de S. Ex.ª o Presidente da República, seguida da execução do Hino Nacional da República de Moçambique.",
+            "en": "Presidential entrance, followed by the National Anthem of the Republic of Mozambique."
+          },
+          "kind": "protocol"
+        },
+        {
+          "start": "11:35",
+          "end": "11:40",
+          "title": {
+            "pt": "Actuação Cultural Tradicional",
+            "en": "Traditional Cultural Performance"
+          },
+          "description": {
+            "pt": "Apresentação de uma actuação cultural tradicional moçambicana.",
+            "en": "Traditional Mozambican cultural performance."
+          },
+          "kind": "culture"
+        },
+        {
+          "start": "11:40",
+          "end": "11:50",
+          "title": {
+            "pt": "Boas-Vindas de S. Ex.ª Rasaque Manhique, Presidente do Conselho Municipal de Maputo",
+            "en": "Welcome Remarks by H.E. Rasaque Manhique, Mayor of Maputo"
+          },
+          "description": {
+            "pt": "Mensagem oficial de boas-vindas à cidade de Maputo.",
+            "en": "Official welcome to the City of Maputo."
+          },
+          "kind": "speech",
+          "speakers": [
+            {
+              "name": "S. Ex.ª Rasaque Manhique",
+              "role": {
+                "pt": "Presidente do Conselho Municipal de Maputo",
+                "en": "Mayor of Maputo"
+              }
+            }
+          ]
+        },
+        {
+          "start": "11:50",
+          "end": "12:00",
+          "title": {
+            "pt": "Intervenção da VFS Global",
+            "en": "VFS Global Address"
+          },
+          "description": {
+            "pt": "Discurso do Sr. Jiten Vyas, Director Comercial da VFS Global.",
+            "en": "Speech by Mr. Jiten Vyas, Chief Commercial Officer, VFS Global."
+          },
+          "kind": "speech",
+          "speakers": [
+            {
+              "name": "Jiten Vyas",
+              "role": {
+                "pt": "Director Comercial, VFS Global",
+                "en": "Chief Commercial Officer, VFS Global"
+              }
+            }
+          ]
+        },
+        {
+          "start": "12:00",
+          "end": "12:05",
+          "title": {
+            "pt": "Vídeo Institucional do PRONTO",
+            "en": "PRONTO Corporate Video"
+          },
+          "description": {
+            "pt": "Exibição do vídeo institucional do PRONTO.",
+            "en": "Screening of the PRONTO institutional video."
+          },
+          "kind": "media"
+        },
+        {
+          "start": "12:05",
+          "end": "12:15",
+          "title": {
+            "pt": "Intervenção de S. Ex.ª Américo Muchanga, Ministro das Comunicações e Transformação Digital",
+            "en": "Remarks by H.E. Américo Muchanga, Minister of Communications and Digital Transformation"
+          },
+          "description": {
+            "pt": "Intervenção que antecede o discurso de abertura de S. Ex.ª o Presidente da República, incluindo o convite para a inauguração do Centro PRONTO, assinalada pela exibição de um vídeo.",
+            "en": "Remarks preceding the Presidential Opening Address. The Minister also invites the President to inaugurate the PRONTO Centre by playing the video."
+          },
+          "kind": "speech",
+          "speakers": [
+            {
+              "name": "S. Ex.ª Américo Muchanga",
+              "role": {
+                "pt": "Ministro das Comunicações e Transformação Digital",
+                "en": "Minister of Communications and Digital Transformation"
+              }
+            }
+          ]
+        },
+        {
+          "start": "12:15",
+          "end": "12:45",
+          "title": {
+            "pt": "Discurso de Abertura de S. Ex.ª Daniel Francisco Chapo, Presidente da República",
+            "en": "Presidential Opening Address by H.E. Daniel Francisco Chapo, President of the Republic"
+          },
+          "description": {
+            "pt": "Discurso de S. Ex.ª o Presidente da República e abertura oficial da conferência.",
+            "en": "Presidential Address and Official Opening of the conference."
+          },
+          "kind": "keynote",
+          "speakers": [
+            {
+              "name": "S. Ex.ª Daniel Francisco Chapo",
+              "role": {
+                "pt": "Presidente da República de Moçambique",
+                "en": "President of the Republic of Mozambique"
+              }
+            }
+          ]
+        },
+        {
+          "start": "12:45",
+          "end": "12:50",
+          "title": {
+            "pt": "Fotografia Oficial de Grupo",
+            "en": "Official Group Photograph"
+          },
+          "description": {
+            "pt": "Fotografia oficial com S. Ex.ª o Presidente da República e as individualidades designadas.",
+            "en": "Official photograph with H.E. the President of the Republic and designated officials."
+          },
+          "kind": "protocol"
+        },
+        {
+          "start": "12:50",
+          "end": "13:00",
+          "title": {
+            "pt": "Partida de S. Ex.ª o Presidente da República",
+            "en": "Departure of H.E. the President of the Republic"
+          },
+          "description": {
+            "pt": "Partida oficial de S. Ex.ª o Presidente da República.",
+            "en": "Official departure of H.E. the President of the Republic."
+          },
+          "kind": "protocol"
+        }
+      ]
+    },
+    {
+      "id": "cc-sessao-1",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "13:00–14:00",
+      "sessionNumber": 1,
+      "title": {
+        "pt": "Transformar os Serviços ao Cidadão: Da Digitalização às Jornadas Integradas do Cidadão",
+        "en": "Transforming Citizen Services: From Digitalisation to Integrated Citizen Journeys"
+      },
+      "description": {
+        "pt": "Explorar como os governos podem evoluir de serviços digitais isolados para jornadas plenamente integradas, combinando centros de atendimento presencial, canais digitais, quiosques de auto-atendimento, atendimento assistido e integração dos processos de retaguarda, com base na experiência prática do Brasil, de Portugal e de Moçambique.",
+        "en": "Explore how governments can evolve from standalone digital services to fully integrated citizen journeys combining physical service centres, digital channels, self-service kiosks, assisted services and back-office integration, drawing on practical experience from Brazil, Portugal and Mozambique."
+      },
+      "topics": {
+        "pt": "Governo centrado no cidadão; integração dos canais presenciais e digitais; inclusão e acessibilidade dos serviços; desafios da transformação e lições aprendidas; e o futuro da prestação de serviços públicos.",
+        "en": "Citizen-centric government; physical and digital channel integration; service inclusion and accessibility; transformation challenges and lessons learned; and the future of government service delivery."
+      },
+      "items": [
+        {
+          "start": "13:00",
+          "end": "13:10",
+          "title": {
+            "pt": "Prestação Integrada de Serviços ao Cidadão: Boas Práticas Internacionais",
+            "en": "Integrated Citizen Service Delivery: Global Best Practices"
+          },
+          "description": {
+            "pt": "Apresentação de Vinicius Silva, CTO da CiX.",
+            "en": "Presentation by Vinicius Silva, CTO, CiX."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Vinicius Silva",
+              "role": {
+                "pt": "CTO, CiX",
+                "en": "CTO, CiX"
+              }
+            }
+          ]
+        },
+        {
+          "start": "13:10",
+          "end": "13:20",
+          "title": {
+            "pt": "Transformação Digital e Serviços ao Cidadão",
+            "en": "Digital Transformation and Citizen Services"
+          },
+          "description": {
+            "pt": "Perspectiva internacional: Ministro, Portugal.",
+            "en": "International perspective — Minister, Portugal."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Ministro (Portugal)",
+              "role": {
+                "pt": "Perspectiva internacional",
+                "en": "International perspective"
+              },
+              "note": "nome não indicado no programa"
+            }
+          ]
+        },
+        {
+          "start": "13:20",
+          "end": "13:30",
+          "title": {
+            "pt": "Modelo Integrado de Prestação de Serviços",
+            "en": "Integrated Service Delivery Model"
+          },
+          "description": {
+            "pt": "Perspectiva internacional: Sr. Leandro Victorino de Moura, Representante do Estado do Paraná, Brasil.",
+            "en": "International perspective — Mr. Leandro Victorino de Moura, Paraná State Delegate, Brazil."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Leandro Victorino de Moura",
+              "role": {
+                "pt": "Representante do Estado do Paraná, Brasil",
+                "en": "Paraná State Delegate, Brazil"
+              }
+            }
+          ]
+        },
+        {
+          "start": "13:30",
+          "end": "14:00",
+          "title": {
+            "pt": "Painel de Debate",
+            "en": "Moderated Panel Discussion"
+          },
+          "kind": "panel",
+          "moderator": {
+            "name": "Vinicius Silva",
+            "role": {
+              "pt": "CTO, CiX",
+              "en": "CTO, CiX"
+            }
+          },
+          "speakers": [
+            {
+              "name": "Adilson Gomes",
+              "role": {
+                "pt": "Director Executivo, ATDI",
+                "en": "CEO, ATDI"
+              }
+            },
+            {
+              "name": "Feliciano Chavana",
+              "role": {
+                "pt": "Director de Tecnologias, Sistemas de Informação e Documentação, Ministério da Administração Estatal e Função Pública (MAEFP)",
+                "en": "Director of Technologies, Information Systems and Documentation, Ministry of State Administration and Civil Service (MAEFP)"
+              }
+            },
+            {
+              "name": "Respect Jongwe",
+              "role": {
+                "pt": "Director Adjunto de Política Estratégica, Planificação, Monitoria e Avaliação, Governo do Zimbabwe",
+                "en": "Deputy Director of Strategic Policy, Planning, Monitoring and Evaluation, Government of Zimbabwe"
+              }
+            },
+            {
+              "name": "Flávia Eva Maziquimbe",
+              "role": {
+                "pt": "SENAMI",
+                "en": "SENAMI"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cc-almoco",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "14:00–15:00",
+      "title": {
+        "pt": "Almoço",
+        "en": "Lunch"
+      },
+      "items": [
+        {
+          "start": "14:00",
+          "end": "15:00",
+          "title": {
+            "pt": "Almoço",
+            "en": "Lunch"
+          },
+          "description": {
+            "pt": "Almoço e networking.",
+            "en": "Lunch and networking."
+          },
+          "kind": "break"
+        }
+      ]
+    },
+    {
+      "id": "cc-sessao-2",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "15:00–16:00",
+      "sessionNumber": 2,
+      "title": {
+        "pt": "eVisa/ETA, Serviços à Diáspora e Serviços Consulares: O Futuro da Mobilidade e do Turismo",
+        "en": "eVisa/ETA, Diaspora & Consular Services: The Future of Mobility and Tourism"
+      },
+      "description": {
+        "pt": "Analisar como a identidade digital, a verificação fiável, as plataformas eVisa/ETA e os serviços consulares modernos podem facilitar uma mobilidade segura e promover o turismo, o comércio e o desenvolvimento económico.",
+        "en": "Examine how digital identity, trusted verification, eVisa/ETA platforms and modern consular services can facilitate secure mobility while promoting tourism, trade and economic development."
+      },
+      "topics": {
+        "pt": "Programas de eVisa e ETA; modelos de prestação de serviços à diáspora; modernização consular; promoção do turismo através de plataformas digitais; e mobilidade segura.",
+        "en": "eVisa and ETA programmes; diaspora service delivery models; consular modernisation; tourism enablement through digital platforms; and secure mobility."
+      },
+      "items": [
+        {
+          "start": "15:00",
+          "end": "15:10",
+          "title": {
+            "pt": "Discurso Principal",
+            "en": "Keynote Address"
+          },
+          "description": {
+            "pt": "Intervenção do Sr. Fredson Bacar, Secretário de Estado do Turismo.",
+            "en": "Keynote remarks by Mr. Fredson Bacar, Secretary of State for Tourism."
+          },
+          "kind": "keynote",
+          "speakers": [
+            {
+              "name": "Fredson Bacar",
+              "role": {
+                "pt": "Secretário de Estado do Turismo",
+                "en": "Secretary of State for Tourism"
+              }
+            }
+          ]
+        },
+        {
+          "start": "15:10",
+          "end": "15:25",
+          "title": {
+            "pt": "eVisa/ETA e Turismo",
+            "en": "eVisa/ETA and Tourism"
+          },
+          "description": {
+            "pt": "Apresentação de Nigel Coelho, Responsável pelo eVisa da VFS Global.",
+            "en": "Presentation by Nigel Coelho, Head eVisa, VFS Global."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Nigel Coelho",
+              "role": {
+                "pt": "Responsável pelo eVisa, VFS Global",
+                "en": "Head eVisa, VFS Global"
+              }
+            }
+          ]
+        },
+        {
+          "start": "15:25",
+          "end": "15:35",
+          "title": {
+            "pt": "Serviços à Diáspora",
+            "en": "Diaspora Services"
+          },
+          "description": {
+            "pt": "Apresentação de Hariprasad Viswanathan, Director Executivo de Operações para a África Subsaariana da VFS Global.",
+            "en": "Presentation by Hariprasad Viswanathan, COO, Sub-Saharan Africa, VFS Global."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Hariprasad Viswanathan",
+              "role": {
+                "pt": "Director Executivo de Operações para a África Subsaariana, VFS Global",
+                "en": "COO, Sub-Saharan Africa, VFS Global"
+              }
+            }
+          ]
+        },
+        {
+          "start": "15:35",
+          "end": "16:00",
+          "title": {
+            "pt": "Painel de Debate",
+            "en": "Moderated Panel Discussion"
+          },
+          "kind": "panel",
+          "moderator": {
+            "name": "Gilberto Tirelli",
+            "role": {
+              "pt": "Director de Expansão Internacional, CiX",
+              "en": "Director of International Expansion, CiX"
+            }
+          },
+          "speakers": [
+            {
+              "name": "Helder Jauana",
+              "role": {
+                "pt": "Turismo de Moçambique",
+                "en": "Mozambique Tourism"
+              }
+            },
+            {
+              "name": "Omar Rehman",
+              "role": {
+                "pt": "Ministério dos Negócios Estrangeiros, Moçambique",
+                "en": "Ministry of Foreign Affairs, Mozambique"
+              }
+            },
+            {
+              "name": "Zainadine Danane",
+              "role": {
+                "pt": "Director-Geral, SENAMI",
+                "en": "Director-General, SENAMI"
+              }
+            },
+            {
+              "name": "Sebulon C. Chicalu",
+              "role": {
+                "pt": "Director Executivo, Conselho de Turismo da Namíbia",
+                "en": "Chief Executive Officer, Namibia Tourism Board"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cc-sessao-3",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "16:00–16:55",
+      "sessionNumber": 3,
+      "title": {
+        "pt": "Novos Modelos de Prestação de Serviços Públicos: PPP, Concessões e Parcerias Orientadas para Resultados",
+        "en": "New Models for Delivering Public Services: PPPs, Concessions and Outcome-Based Partnerships"
+      },
+      "description": {
+        "pt": "Debater como os governos podem acelerar a transformação dos serviços públicos através de parcerias sustentáveis que combinem investimento do sector privado, tecnologia, inovação, experiência operacional e resultados mensuráveis na prestação de serviços.",
+        "en": "Discuss how governments can accelerate public service transformation through sustainable partnerships involving private-sector investment, technology, innovation, operational expertise and measurable service outcomes."
+      },
+      "topics": {
+        "pt": "Modelos de parcerias público-privadas para a prestação de serviços públicos; enquadramento e governação das concessões; financiamento da transformação digital; partilha de riscos e gestão do desempenho; prestação de serviços apoiada pela tecnologia; ecossistemas sustentáveis de serviços ao cidadão; e boas práticas internacionais.",
+        "en": "PPP models for public service delivery; concession frameworks and governance; financing digital transformation; risk sharing and performance management; technology-enabled service delivery; sustainable citizen service ecosystems; and international best practices."
+      },
+      "items": [
+        {
+          "start": "16:00",
+          "end": "16:45",
+          "title": {
+            "pt": "Painel de Debate Ministerial e Institucional",
+            "en": "Moderated Ministerial & Institutional Panel Discussion"
+          },
+          "kind": "panel",
+          "moderator": {
+            "name": "Fernanda Rodrigues",
+            "role": {
+              "pt": "Responsável de Marketing, CiX",
+              "en": "Head of Marketing, CiX"
+            }
+          },
+          "speakers": [
+            {
+              "name": "Phindiwe Mbhele",
+              "role": {
+                "pt": "Departamento dos Assuntos Internos, África do Sul",
+                "en": "Department of Home Affairs, South Africa"
+              }
+            },
+            {
+              "name": "Luis Matsinhe",
+              "role": {
+                "pt": "Director Adjunto do Tesouro, Moçambique",
+                "en": "Deputy Director of Treasury, Mozambique"
+              }
+            },
+            {
+              "name": "Leandro Victorino de Moura",
+              "role": {
+                "pt": "Estado do Paraná, Brasil",
+                "en": "Paraná State, Brazil"
+              }
+            },
+            {
+              "name": "Vasco Tovela",
+              "role": {
+                "pt": "ATDI, Moçambique",
+                "en": "ATDI, Mozambique"
+              }
+            },
+            {
+              "name": "Onório Manuel",
+              "role": {
+                "pt": "Vice-Presidente, CTA",
+                "en": "Vice-President, CTA"
+              }
+            }
+          ]
+        },
+        {
+          "start": "16:45",
+          "end": "16:55",
+          "title": {
+            "pt": "Serviços de Educação",
+            "en": "Education Services"
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Mishal Fateally",
+              "role": {
+                "pt": "Consultor",
+                "en": "Consultant"
+              }
+            },
+            {
+              "name": "Kainaaz Mistry",
+              "role": {
+                "pt": "Responsável pelos Serviços de Educação",
+                "en": "Head of Education Services"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cc-sessao-4",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "16:55–17:40",
+      "sessionNumber": 4,
+      "title": {
+        "pt": "Segurança de Dados, Conformidade e Protecção de Dados",
+        "en": "Data Security, Compliance and Data Protection"
+      },
+      "description": {
+        "pt": "Debater como empresas como a VFS Global e a CiX se adaptam aos novos modelos de segurança e protecção de dados, com enfoque na conformidade.",
+        "en": "Discuss how companies such as VFS Global and CiX adapt to new data security and data protection models, with a focus on compliance."
+      },
+      "items": [
+        {
+          "start": "16:55",
+          "end": "17:05",
+          "title": {
+            "pt": "Segurança de Dados, Protecção de Dados e Conformidade",
+            "en": "Data Security, Data Protection and Compliance"
+          },
+          "description": {
+            "pt": "Apresentação de Karina Freitas Da Silva Pinto, Directora-Geral da Área Jurídica da VFS Global.",
+            "en": "Presentation by Karina Freitas Da Silva Pinto, General Manager Legal, VFS Global."
+          },
+          "kind": "presentation",
+          "speakers": [
+            {
+              "name": "Karina Freitas Da Silva Pinto",
+              "role": {
+                "pt": "Directora-Geral da Área Jurídica, VFS Global",
+                "en": "General Manager Legal, VFS Global"
+              }
+            }
+          ]
+        },
+        {
+          "start": "17:05",
+          "end": "17:40",
+          "title": {
+            "pt": "Painel de Debate",
+            "en": "Moderated Panel Discussion"
+          },
+          "kind": "panel",
+          "moderator": {
+            "name": "Karina Freitas Da Silva Pinto",
+            "role": {
+              "pt": "Directora-Geral da Área Jurídica, VFS Global",
+              "en": "General Manager Legal, VFS Global"
+            }
+          },
+          "speakers": [
+            {
+              "name": "Sergio Mapsanganhe",
+              "role": {
+                "pt": "MCTD",
+                "en": "MCTD"
+              }
+            },
+            {
+              "name": "Arnaud de La Chapelle",
+              "role": {
+                "pt": "VFS Global",
+                "en": "VFS Global"
+              },
+              "note": "proposto / proposed"
+            },
+            {
+              "name": "Dr. Paulo Maculuve",
+              "role": {
+                "pt": "Assessor do Conselho de Administração do INTIC",
+                "en": "Adviser to the INTIC Board"
+              }
+            },
+            {
+              "name": "Wisdom Kwaku Deku",
+              "role": {
+                "pt": "Secretário Executivo, Autoridade Nacional de Identificação (NIA), Gana",
+                "en": "Executive Secretary, National Identification Authority (NIA), Ghana"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cc-encerramento",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "17:40–18:00",
+      "title": {
+        "pt": "Encerramento",
+        "en": "Closing"
+      },
+      "items": [
+        {
+          "start": "17:40",
+          "end": "17:50",
+          "title": {
+            "pt": "Discurso de Encerramento de S. Ex.ª Américo Muchanga, Ministro das Comunicações e Transformação Digital",
+            "en": "Closing Address by H.E. Américo Muchanga, Minister of Communications and Digital Transformation"
+          },
+          "description": {
+            "pt": "Encerramento oficial do programa.",
+            "en": "Formal closing of the programme."
+          },
+          "kind": "speech",
+          "speakers": [
+            {
+              "name": "S. Ex.ª Américo Muchanga",
+              "role": {
+                "pt": "Ministro das Comunicações e Transformação Digital",
+                "en": "Minister of Communications and Digital Transformation"
+              }
+            }
+          ]
+        },
+        {
+          "start": "17:50",
+          "end": "18:00",
+          "title": {
+            "pt": "Entrega de Troféus",
+            "en": "Trophy Handover"
+          },
+          "description": {
+            "pt": "Entrega de troféus aos oradores e participantes dos painéis.",
+            "en": "Trophies to speakers and panellists."
+          },
+          "kind": "awards"
+        }
+      ]
+    },
+    {
+      "id": "cc-jantar-gala",
+      "day": 1,
+      "date": "2026-10-14",
+      "time": "19:00–22:00",
+      "highlight": true,
+      "title": {
+        "pt": "Jantar Oficial de Gala",
+        "en": "Official Gala Dinner"
+      },
+      "items": [
+        {
+          "start": "19:00",
+          "end": "22:00",
+          "title": {
+            "pt": "Jantar Oficial de Gala",
+            "en": "Official Gala Dinner"
+          },
+          "description": {
+            "pt": "Jantar institucional, networking e programa cultural.",
+            "en": "Institutional dinner, networking and cultural programme."
+          },
+          "kind": "networking"
+        }
+      ]
+    }
+  ],
+  "_notes": [
+    "Fonte: Citizen_Connect_Agenda_Portugues_Final_A4_1.pdf + Citizen_Connect_Agenda_English_Updated_A4.pdf (conteúdo equivalente).",
+    "Neste ficheiro, 'events' = blocos do programa (mesma estrutura do programa do Pyne). O evento em si é o objecto 'event'.",
+    "Local (venue) não indicado no programa — por confirmar.",
+    "Sessão 1, 13:10: o orador é só 'Ministro, Portugal' — nome por confirmar.",
+    "Sessão 4: Arnaud de La Chapelle está como 'proposto'.",
+    "'Serviços de Educação' (16:45–16:55) aparece dentro da Sessão 3 no programa; mantido assim.",
+    "Cores tiradas do logótipo: azul #183A62, coral #EF655B; o anel do 'O' tem gradiente verde/laranja/vermelho/roxo/azul."
+  ]
+}

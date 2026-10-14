@@ -18,6 +18,50 @@
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
+/* ---------- Efeitos por evento (valores por defeito = Pyne Awards, sem alterações) ---------- */
+:root {
+  --hero-bg:
+    radial-gradient(55% 65% at 18% 38%, rgba(245, 158, 11, 0.2), transparent 70%),
+    radial-gradient(45% 60% at 100% 0%, rgba(251, 191, 36, 0.08), transparent 70%),
+    radial-gradient(50% 60% at 95% 100%, rgba(193, 33, 40, 0.28), transparent 70%),
+    linear-gradient(160deg, #0a1728 0%, #13263d 45%, #172e4a 70%, #0c1a2b 100%);
+  --grad-accent: linear-gradient(135deg, #ffe07a 0%, #fdc91c 40%, #e2a910 100%);
+  --grad-text: linear-gradient(180deg, #ffe89a 0%, #fdc91c 45%, #d99f0b 100%);
+  --grad-text-shadow: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+  --grad-rule: linear-gradient(90deg, transparent, rgba(253, 201, 28, 0.8), transparent);
+  --grad-timeline: linear-gradient(180deg, var(--color-gold), color-mix(in oklab, var(--color-gold) 30%, transparent));
+  --pattern-display: block;
+}
+
+/* ---------- Citizen Connect Africa 2026: azul #183A62 + coral #EF655B, fundo claro ---------- */
+[data-event='citizen-connect-2026'] {
+  --color-navy: #183a62;
+  --color-navy-deep: #10294a;
+  --color-navy-soft: #224b7a;
+  --color-navy-line: #2d5a8c;
+  /* "gold" = acento do evento: coral. Mais claro sobre azul (contraste AA), mais escuro sobre branco */
+  --color-gold: #f58a81;
+  --color-gold-soft: #f9c2bd;
+  --color-gold-deep: #c2463d;
+  --color-red: #d93a43;
+  --color-paper: #f7f8fb;
+  --color-paper-line: #e2e7ef;
+  --color-ink: #183a62;
+  --color-ink-soft: #55657d;
+  --font-serif: 'Montserrat', 'Inter', system-ui, sans-serif;
+  --hero-bg:
+    radial-gradient(50% 70% at 100% 0%, rgba(239, 101, 91, 0.22), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, rgba(47, 167, 223, 0.18), transparent 70%),
+    linear-gradient(160deg, #10294a 0%, #183a62 55%, #1f4a7c 100%);
+  --grad-accent: linear-gradient(135deg, #f58a81 0%, #ef655b 45%, #dc4d44 100%);
+  --grad-text: linear-gradient(180deg, #f8a39b 0%, #ef655b 55%, #e2534a 100%);
+  --grad-text-shadow: none;
+  /* gradiente do logótipo: só em pequenos detalhes */
+  --grad-rule: linear-gradient(90deg, #7cc576, #f7a541, #e8505b, #8e4fa0, #2fa7df);
+  --grad-timeline: linear-gradient(180deg, #7cc576, #f7a541, #e8505b, #8e4fa0, #2fa7df);
+  --pattern-display: none;
+}
+
 html {
   background: var(--color-navy);
   color: #fff;
@@ -70,36 +114,47 @@ body {
 
 /* Fundo de gala: marinho profundo com brilho dourado e um toque de vermelho */
 .hero-bg {
-  background:
-    radial-gradient(55% 65% at 18% 38%, rgba(245, 158, 11, 0.2), transparent 70%),
-    radial-gradient(45% 60% at 100% 0%, rgba(251, 191, 36, 0.08), transparent 70%),
-    radial-gradient(50% 60% at 95% 100%, rgba(193, 33, 40, 0.28), transparent 70%),
-    linear-gradient(160deg, #0a1728 0%, #13263d 45%, #172e4a 70%, #0c1a2b 100%);
+  background: var(--hero-bg);
 }
 
 /* Padrão geométrico (losangos) inspirado no motivo do emblema */
 .pattern-diamonds {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23FDC91C' stroke-width='1'%3E%3Cpath d='M28 4 52 28 28 52 4 28Z'/%3E%3Cpath d='M28 16 40 28 28 40 16 28Z'/%3E%3C/g%3E%3Cg fill='%23FDC91C'%3E%3Ccircle cx='0' cy='0' r='1.6'/%3E%3Ccircle cx='56' cy='0' r='1.6'/%3E%3Ccircle cx='0' cy='56' r='1.6'/%3E%3Ccircle cx='56' cy='56' r='1.6'/%3E%3Ccircle cx='28' cy='28' r='1.6'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 56px 56px;
+  display: var(--pattern-display);
 }
 
 /* Texto dourado com brilho metálico */
 .text-gold-grad {
-  background: linear-gradient(180deg, #ffe89a 0%, #fdc91c 45%, #d99f0b 100%);
+  background: var(--grad-text);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   /* text-shadow pinta por cima do texto recortado; usar drop-shadow */
   text-shadow: none;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+  filter: var(--grad-text-shadow);
 }
 
 .bg-gold-grad {
-  background: linear-gradient(135deg, #ffe07a 0%, #fdc91c 40%, #e2a910 100%);
+  background: var(--grad-accent);
 }
 
 /* Linha dourada que esbate nas pontas */
 .gold-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(253, 201, 28, 0.8), transparent);
+  background: var(--grad-rule);
+}
+
+/* linha do tempo da agenda */
+.timeline-rail {
+  background: var(--grad-timeline);
+}
+
+/* sublinhado com o gradiente do evento */
+.event-underline {
+  background-image: var(--grad-rule);
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
 }
